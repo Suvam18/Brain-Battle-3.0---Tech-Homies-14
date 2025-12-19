@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Buddy - Financial Tracking Interface</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="poster-container">
+        <!-- Background Elements -->
+        <div class="bg-shape bg-shape-1"></div>
+        <div class="bg-shape bg-shape-2"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- Sidebar Menu moved outside poster-container -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <span class="material-icons">account_balance_wallet</span>
+                Budget Buddy
+            </div>
+            <div class="sidebar-close" id="sidebarClose">
+                <span class="material-icons">close</span>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <a href="#hero" class="sidebar-menu-item active" onclick="toggleSidebar()">
+                <span class="material-icons">dashboard</span>
+                Dashboard
+            </a>
+            <a href="#expenses-section" class="sidebar-menu-item" onclick="toggleSidebar()">
+                <span class="material-icons">receipt_long</span>
+                Expenses
+            </a>
+            <a href="#budget-section" class="sidebar-menu-item" onclick="toggleSidebar()">
+                <span class="material-icons">account_balance</span>
+                Budget
+            </a>
+            <a href="#insights-section" class="sidebar-menu-item" onclick="toggleSidebar()">
+                <span class="material-icons">insights</span>
+                Insights
+            </a>
+            <a href="#" class="sidebar-menu-item" id="sidebarProfileLink">
+                <span class="material-icons">person</span>
+                Profile
+            </a>
+        </div>
+        <div class="sidebar-footer">
+            <div class="sidebar-profile" id="sidebarProfileSection" style="display: none;">
+                <div class="sidebar-profile-avatar" id="sidebarAvatar">JD</div>
+                <div class="sidebar-profile-info">
+                    <div class="sidebar-profile-name" id="sidebarName">John Doe</div>
+                    <div class="sidebar-profile-email" id="sidebarEmail">john.doe@example.com</div>
+                </div>
+            </div>
+            <div class="sidebar-login" id="sidebarLoginSection">
+                <button class="btn btn-primary btn-block"
+                    onclick="document.getElementById('loginModal').classList.add('active'); document.getElementById('authOverlay').classList.add('active'); toggleSidebar();">Login
+                    / Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Area -->
+    <div class="main-content" id="mainContent">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="navbar-left">
+                <div class="menu-toggle" id="menuToggle">
+                    <span class="material-icons">menu</span>
+                </div>
+                <div class="brand">
+                    <span class="material-icons">account_balance_wallet</span>
+                    Budget Buddy
+                </div>
+            </div>
+            <div class="navbar-center">
+                <a href="#" class="navbar-link">Home</a>
+                <div class="nav-item-dropdown">
+                    <a href="#" class="navbar-link" id="featuresDropdownToggle">Features <span class="material-icons"
+                            style="font-size: 16px;">expand_more</span></a>
+                    <div class="dropdown-menu" id="featuresDropdownMenu">
+                        <a href="#expenses-section" class="dropdown-item"><span class="material-icons">receipt</span>
+                            Expense Tracking</a>
+                        <a href="#insights-section" class="dropdown-item"><span class="material-icons">category</span>
+                            Automatic Categorization</a>
+                        <a href="#budget-section" class="dropdown-item"><span class="material-icons">savings</span>
+                            Monthly Budget Planning</a>
+                        <a href="#insights-section" class="dropdown-item"><span class="material-icons">bar_chart</span>
+                            Visual Reports & Analytics</a>
+                        <a href="#" class="dropdown-item"><span class="material-icons">notifications</span> Alerts and
+                            Notifications</a>
+                    </div>
+                </div>
+                <a href="#" class="navbar-link" id="calculatorLink">Calculators</a>
+                <a href="#" class="navbar-link" id="contactLink">Contact Us</a>
+            </div>
+            <div class="navbar-right">
+                <div id="authButtons">
+                    <button class="nav-btn login-btn" id="navLoginBtn">Login</button>
+                    <button class="nav-btn signin-btn" id="navRegisterBtn">Sign Up</button>
+                </div>
+                <div id="userProfile" style="display: none;">
+                    <span class="user-greeting">Hi, <span id="usernameDisplay">User</span></span>
+                    <button class="nav-btn logout-btn" id="navLogoutBtn">Logout</button>
+                </div>
+                <span class="material-icons theme-toggle">dark_mode</span>
+            </div>
+        </nav>
+
+        <!-- Hero Slider Section -->
+        <section class="hero-slider">
+            <div class="slides-container">
+
+                <!-- Slide 1 -->
+                <div class="slide active">
+                    <div class="slide-bg"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero1.jpg');">
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-title slide-animate">Smart Budgeting 📝</h1>
+                        <p class="hero-subtitle slide-animate delay-1">Plan your expenses and stick to your goals.
+                        </p>
+                        <div class="hero-buttons slide-animate delay-2"
+                            style="display: flex; gap: 15px; justify-content: center;">
+                            <button class="btn btn-primary" id="btnHeroGetStarted"><span>Get Started</span></button>
+                            <button class="btn btn-secondary ai-track-btn" onclick="openSmartTrackModal()">
+                                <span class="material-icons">auto_awesome</span> Smart Track
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <div class="slide-bg"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero2.jpg');">
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-title">Save More 💰</h1>
+                        <p class="hero-subtitle">Every coin saved is a future dream earned.</p>
+                        <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center;">
+                            <button class="btn btn-primary" id="btnHeroStartSaving"><span>Start Saving</span></button>
+                            <button class="btn btn-secondary ai-track-btn" onclick="openSmartTrackModal()">
+                                <span class="material-icons">auto_awesome</span> Smart Track
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <div class="slide-bg"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero3.jpg');">
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-title">Track Taxes & Bills 📄</h1>
+                        <p class="hero-subtitle">Never miss a deadline. Keep your records organized.</p>
+                        <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center;">
+                            <button class="btn btn-primary" id="btnHeroTrackNow"><span>Track Now</span></button>
+                            <button class="btn btn-secondary ai-track-btn" onclick="openSmartTrackModal()">
+                                <span class="material-icons">auto_awesome</span> Smart Track
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="slide">
+                    <div class="slide-bg"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero4.jpg');">
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-title">Mobile Access 📱</h1>
+                        <p class="hero-subtitle">Manage your budget anytime, anywhere.</p>
+                        <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center;">
+                            <a href="#" class="btn btn-primary" id="btnHeroDownloadApp"
+                                style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;"><span>Download
+                                    App</span></a>
+                            <button class="btn btn-secondary ai-track-btn" onclick="openSmartTrackModal()">
+                                <span class="material-icons">auto_awesome</span> Smart Track
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Slider Controls -->
+            <div class="slider-dots">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </section>
+
+        <!-- Content Container -->
+        <div class="content-container">
+            <!-- Modern Feature Sections -->
+            <div class="feature-sections">
+
+                <!-- Food Section (Video Left, Text Right) -->
+                <section class="feature-section reverse" id="food">
+                    <div class="feature-content">
+                        <div class="feature-label food-label">
+                            <span class="material-icons">restaurant</span> Food & Dining
+                        </div>
+                        <h2 class="feature-title">Deliciously on Budget.</h2>
+                        <p class="feature-description">
+                            Track every bite and crave responsibly. See exactly how much your foodie adventures are
+                            costing you without losing your appetite.
+                        </p>
+
+                        <div class="feature-meta">
+                            <div class="meta-item">
+                                <span class="meta-value" id="foodBudgetUsed">-</span>
+                                <span class="meta-label">Budget Used</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-value" id="foodSpent">-</span>
+                                <span class="meta-label">Spent</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary feature-btn">View Food Details</button>
+                    </div>
+                    <div class="feature-media">
+                        <div class="media-container">
+                            <video autoplay loop muted playsinline
+                                poster="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg">
+                                <source src="https://videos.pexels.com/video-files/3093463/3093463-sd_640_360_30fps.mp4"
+                                    type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="media-overlay"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Travel Section (Video Left, Text Right) - UPDATED to Text Left, Video Right -->
+                <section class="feature-section" id="travel">
+                    <div class="feature-content">
+                        <div class="feature-label travel-label">
+                            <span class="material-icons">flight</span> Travel & Commute
+                        </div>
+                        <h2 class="feature-title">Go Places, Save Money.</h2>
+                        <p class="feature-description">
+                            From daily commutes to dream vacations. Keep your travel expenses on the radar and never
+                            get stranded without funds.
+                        </p>
+
+                        <div class="feature-meta">
+                            <div class="meta-item">
+                                <span class="meta-value" id="travelBudgetUsed">-</span>
+                                <span class="meta-label">Budget Used</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-value" id="travelSpent">-</span>
+                                <span class="meta-label">Spent</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary feature-btn">View Travel Details</button>
+                    </div>
+                    <div class="feature-media">
+                        <div class="media-container">
+                            <video autoplay loop muted playsinline
+                                poster="https://images.pexels.com/photos/21014/pexels-photo.jpg">
+                                <source src="https://videos.pexels.com/video-files/855787/855787-sd_640_360_24fps.mp4"
+                                    type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="media-overlay"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Subscriptions Section (Text Left, Video Right) - UPDATED to Video Left, Text Right -->
+                <section class="feature-section reverse" id="subscriptions">
+                    <div class="feature-content">
+                        <div class="feature-label sub-label">
+                            <span class="material-icons">credit_card</span> Subscriptions
+                        </div>
+                        <h2 class="feature-title">Manage Recurring Costs.</h2>
+                        <p class="feature-description">
+                            Netflix, Spotify, Gym? Don't let small recurring charges drain your account. Track and
+                            manage all your active subscriptions in one place.
+                        </p>
+
+                        <div class="feature-meta">
+                            <div class="meta-item">
+                                <span class="meta-value" id="subscriptionsBudgetUsed">-</span>
+                                <span class="meta-label">Budget Used</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-value" id="subscriptionsSpent">-</span>
+                                <span class="meta-label">Spent</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary feature-btn">View Subscriptions</button>
+                    </div>
+                    <div class="feature-media">
+                        <div class="media-container">
+                            <video autoplay loop muted playsinline
+                                poster="https://images.pexels.com/photos/2988232/pexels-photo-2988232.jpeg">
+                                <source src="https://videos.pexels.com/video-files/4440939/4440939-sd_640_360_25fps.mp4"
+                                    type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="media-overlay"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Bills Section (Video Left, Text Right) - UPDATED to Text Left, Video Right -->
+                <section class="feature-section" id="bills">
+                    <div class="feature-content">
+                        <div class="feature-label bills-label">
+                            <span class="material-icons">receipt</span> Bills & Utilities
+                        </div>
+                        <h2 class="feature-title">Never Miss a Due Date.</h2>
+                        <p class="feature-description">
+                            Stay on top of electricity, water, and internet bills. Get reminders and avoid those
+                            pesky late fees.
+                        </p>
+
+                        <div class="feature-meta">
+                            <div class="meta-item">
+                                <span class="meta-value" id="billsBudgetUsed">-</span>
+                                <span class="meta-label">Budget Used</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-value" id="billsSpent">-</span>
+                                <span class="meta-label">Spent</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary feature-btn">View Bills</button>
+                    </div>
+                    <div class="feature-media">
+                        <div class="media-container">
+                            <video autoplay loop muted playsinline
+                                poster="https://images.pexels.com/photos/164501/pexels-photo-164501.jpeg">
+                                <source src="https://videos.pexels.com/video-files/4964654/4964654-sd_640_360_25fps.mp4"
+                                    type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="media-overlay"></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- Analytics Row -->
+            <div class="analytics-row">
+                <div class="analytics-card budget-progress" id="budget-section">
+                    <div class="budget-header-row"
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div class="budget-title" style="margin-bottom: 0;">Monthly Budget</div>
+                        <span class="material-icons edit-icon" id="editBudgetBtn" title="Edit Budget"
+                            style="cursor: pointer; color: #666;">edit</span>
+                    </div>
+
+                    <div class="budget-main-stat" style="text-align: center; margin-bottom: 15px;">
+                        <span id="budgetPercentDisplay"
+                            style="font-size: 32px; font-weight: 700; color: #1a5e3a;">0%</span>
+                        <span class="budget-subtitle"
+                            style="font-size: 14px; color: #666; margin-left: 5px;">used</span>
+                    </div>
+
+                    <div class="budget-bar"
+                        style="height: 12px; background-color: #e0e0e0; border-radius: 6px; overflow: hidden; margin-bottom: 20px;">
+                        <div class="budget-fill" id="budgetFillBar"
+                            style="width: 0%; height: 100%; background: linear-gradient(90deg, #4caf50, #81c784); transition: width 1s ease-in-out; border-radius: 6px;">
+                        </div>
+                    </div>
+
+                    <div class="budget-details-grid"
+                        style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center;">
+                        <div class="budget-detail-item">
+                            <span class="detail-label"
+                                style="display: block; font-size: 12px; color: #888;">Spent</span>
+                            <span class="detail-value" id="budgetSpentDisplay"
+                                style="font-weight: 600; color: #333;">₹0</span>
+                        </div>
+                        <div class="budget-detail-item">
+                            <span class="detail-label"
+                                style="display: block; font-size: 12px; color: #888;">Remaining</span>
+                            <span class="detail-value" id="budgetRemainingDisplay"
+                                style="font-weight: 600; color: #333;">₹0</span>
+                        </div>
+                        <div class="budget-detail-item">
+                            <span class="detail-label"
+                                style="display: block; font-size: 12px; color: #888;">Limit</span>
+                            <span class="detail-value" id="budgetTotalDisplay"
+                                style="font-weight: 600; color: #333;">₹0</span>
+                        </div>
+                    </div>
+
+                    <div class="budget-status-message" id="budgetStatusMessage"
+                        style="margin-top: 15px; text-align: center; font-size: 13px; font-style: italic; color: #555;">
+                        <!-- JS Populate -->
+                    </div>
+                </div>
+                <div class="analytics-card pie-chart" id="insights-section">
+                    <div class="budget-title">
+                        Spending Categories
+                        <span class="material-icons" id="btnExpandCategories"
+                            style="float: right; cursor: pointer; color: #666;"
+                            title="View Detailed Graph">bar_chart</span>
+                    </div>
+                    <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+                        <canvas id="dashboardChart"></canvas>
+                    </div>
+                </div>
+                <div class="analytics-card heatmap" id="expenses-section">
+                    <div class="budget-title">Daily Spending Heatmap</div>
+                    <div class="heatmap-labels"
+                        style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 10px; color: #666; margin-bottom: 4px;">
+                        <span>Sun</span>
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                    </div>
+                    <div class="heatmap-grid">
+                        <div class="heatmap-cell" style="background-color: #e8f5e9;"></div>
+                        <div class="heatmap-cell" style="background-color: #c8e6c9;"></div>
+                        <div class="heatmap-cell" style="background-color: #a5d6a7;"></div>
+                        <div class="heatmap-cell" style="background-color: #81c784;"></div>
+                        <div class="heatmap-cell" style="background-color: #66bb6a;"></div>
+                        <div class="heatmap-cell" style="background-color: #4caf50;"></div>
+                        <div class="heatmap-cell" style="background-color: #43a047;"></div>
+                        <div class="heatmap-cell" style="background-color: #c8e6c9;"></div>
+                        <div class="heatmap-cell" style="background-color: #e8f5e9;"></div>
+                        <div class="heatmap-cell" style="background-color: #a5d6a7;"></div>
+                        <div class="heatmap-cell" style="background-color: #81c784;"></div>
+                        <div class="heatmap-cell" style="background-color: #66bb6a;"></div>
+                        <div class="heatmap-cell" style="background-color: #4caf50;"></div>
+                        <div class="heatmap-cell" style="background-color: #388e3c;"></div>
+                        <div class="heatmap-cell" style="background-color: #a5d6a7;"></div>
+                        <div class="heatmap-cell" style="background-color: #81c784;"></div>
+                        <div class="heatmap-cell" style="background-color: #e8f5e9;"></div>
+                        <div class="heatmap-cell" style="background-color: #c8e6c9;"></div>
+                        <div class="heatmap-cell" style="background-color: #66bb6a;"></div>
+                        <div class="heatmap-cell" style="background-color: #4caf50;"></div>
+                        <div class="heatmap-cell" style="background-color: #388e3c;"></div>
+                        <div class="heatmap-cell" style="background-color: #2e7d32;"></div>
+                        <div class="heatmap-card" style="background-color: #e8f5e9;"></div>
+                        <div class="heatmap-cell" style="background-color: #a5d6a7;"></div>
+                        <div class="heatmap-cell" style="background-color: #81c784;"></div>
+                        <div class="heatmap-cell" style="background-color: #c8e6c9;"></div>
+                        <div class="heatmap-cell" style="background-color: #66bb6a;"></div>
+                        <div class="heatmap-cell" style="background-color: #4caf50;"></div>
+                        <div class="heatmap-cell" style="background-color: #388e3c;"></div>
+                        <div class="heatmap-cell" style="background-color: #1b5e20;"></div>
+                        <div class="heatmap-cell" style="background-color: #c8e6c9;"></div>
+                        <div class="heatmap-cell" style="background-color: #e8f5e9;"></div>
+                        <div class="heatmap-cell" style="background-color: #a5d6a7;"></div>
+                        <div class="heatmap-cell" style="background-color: #81c784;"></div>
+                        <div class="heatmap-cell" style="background-color: #66bb6a;"></div>
+                        <div class="heatmap-cell" style="background-color: #4caf50;"></div>
+                        <div class="heatmap-cell" style="background-color: #388e3c;"></div>
+                    </div>
+                    <div class="heatmap-label">
+                        <span>Less Spend</span>
+                        <span>More Spend 🔥</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="bottom-row">
+                <div class="top-spending">
+                    <div class="spending-title">Top 4 Spending Areas:</div>
+                    <ul class="spending-list">
+                        <li class="spending-item">
+                            <div class="spending-number">1</div>
+                            <span>Food</span>
+                        </li>
+                        <li class="spending-item">
+                            <div class="spending-number">2</div>
+                            <span>Travel</span>
+                        </li>
+                        <li class="spending-item">
+                            <div class="spending-number">3</div>
+                            <span>Bills</span>
+                        </li>
+                        <li class="spending-item">
+                            <div class="spending-number">4</div>
+                            <span>Subscriptions</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="shock-mode"
+                    style="background: linear-gradient(135deg, #2e7d32, #66bb6a); color: white; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);">
+                    <div class="shock-title"
+                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="material-icons"
+                                style="animation: ring 3s infinite;">notifications_active</span>
+                            <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Alerts & Insights</h3>
+                        </div>
+                        <span class="material-icons" style="opacity: 0.8; font-size: 20px;">insights</span>
+                    </div>
+                    <div class="notification-content" id="notificationContent"
+                        style="font-size: 13px; display: flex; flex-direction: column; gap: 8px;">
+                        <!-- JS Populated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-top">
+                    <div class="footer-section">
+                        <h3 class="footer-title teal">Budget Buddy</h3>
+                        <ul class="footer-links">
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/press">Press</a></li>
+                            <li><a href="https://blog.budgetbuddy.com">Blog</a></li>
+                            <li><a href="/jobs">Jobs</a></li>
+                            <li><a href="/calculators">Calculators</a></li>
+                            <li><a href="https://dev.budgetbuddy.com/">API</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3 class="footer-title orange">Account</h3>
+                        <ul class="footer-links">
+                            <li><a href="#" id="footerLoginLink">Log in</a></li>
+                            <li><a href="#" id="footerSignupLink">Sign up</a></li>
+                            <li><a href="/password_reset">Reset password</a></li>
+                            <li><a href="/account/settings">Settings</a></li>
+                            <li><a href="/subscriptions/new">Budget Buddy Pro</a></li>
+                            <li><a href="/pay">Budget Buddy Pay</a></li>
+                            <li><a href="/card">Budget Buddy Card</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3 class="footer-title charcoal">More</h3>
+                        <ul class="footer-links">
+                            <li><a href="/contact">Contact us</a></li>
+                            <li><a href="http://feedback.budgetbuddy.com/knowledgebase">FAQ</a></li>
+                            <li><a href="https://status.budgetbuddy.com">Site status</a></li>
+                            <li><a href="/terms">Terms of Service</a></li>
+                            <li><a href="/privacy">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom" id="download-app">
+                    <div class="app-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=com.BudgetBuddy.BudgetBuddyMobile"
+                            class="block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="141" height="42">
+                                <defs>
+                                    <linearGradient id="a" x1="60.944%" x2="26.763%" y1="4.777%" y2="71.867%">
+                                        <stop offset="0%" stop-color="#439FF7"></stop>
+                                        <stop offset=".66%" stop-color="#43A0F7"></stop>
+                                        <stop offset="26.01%" stop-color="#52BCF8"></stop>
+                                        <stop offset="51.22%" stop-color="#5CCFF9"></stop>
+                                        <stop offset="76.04%" stop-color="#63DBFA"></stop>
+                                        <stop offset="100%" stop-color="#65DFFA"></stop>
+                                    </linearGradient>
+                                    <linearGradient id="b" x1="107.557%" x2="-130.583%" y1="49.976%" y2="49.976%">
+                                        <stop offset="0%" stop-color="#FADE4B"></stop>
+                                        <stop offset="40.87%" stop-color="#F5BD42"></stop>
+                                        <stop offset="77.54%" stop-color="#F2A73B"></stop>
+                                        <stop offset="100%" stop-color="#F19E39"></stop>
+                                    </linearGradient>
+                                    <linearGradient id="c" x1="86.075%" x2="-49.955%" y1="31.204%" y2="137.68%">
+                                        <stop offset="0%" stop-color="#EB4D4C"></stop>
+                                        <stop offset="100%" stop-color="#B22C62"></stop>
+                                    </linearGradient>
+                                    <linearGradient id="d" x1="-18.851%" x2="42.089%" y1="-12.377%" y2="35.229%">
+                                        <stop offset="0%" stop-color="#549C75"></stop>
+                                        <stop offset="6.85%" stop-color="#54A375"></stop>
+                                        <stop offset="47.62%" stop-color="#60CA7D"></stop>
+                                        <stop offset="80.09%" stop-color="#6AE180"></stop>
+                                        <stop offset="100%" stop-color="#6DEA82"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <g fill="none">
+                                    <path fill="#000"
+                                        d="M135.731 42H5.67C2.81 42 .452 39.622.452 36.737V5.263C.452 2.378 2.81 0 5.67 0h130.111C138.641 0 141 2.378 141 5.263v31.474c-.05 2.885-2.41 5.263-5.27 5.263z">
+                                    </path>
+                                    <path fill="#A5A5A5"
+                                        d="M135.731.86c2.409 0 4.366 1.974 4.366 4.403v31.474c0 2.43-1.957 4.403-4.366 4.403H5.67c-2.409 0-4.365-1.974-4.365-4.403V5.263C1.305 2.833 3.26.86 5.67.86h130.061zm0-.86H5.67C2.81 0 .452 2.378.452 5.263v31.474C.452 39.622 2.81 42 5.67 42h130.111c2.86 0 5.219-2.378 5.219-5.263V5.263C140.95 2.378 138.59 0 135.73 0z">
+                                    </path>
+                                    <path fill="#FFF" stroke="#FFF" stroke-width=".5"
+                                        d="M49.776 10.728c0 .86-.25 1.568-.752 2.125-.602.607-1.355.91-2.308.91-.904 0-1.656-.303-2.309-.96-.652-.608-.953-1.418-.953-2.328 0-.911.301-1.72.953-2.328.653-.607 1.405-.962 2.309-.962.451 0 .853.102 1.304.253.402.152.753.405.954.709l-.552.557c-.402-.507-1.004-.76-1.706-.76-.653 0-1.205.253-1.706.709-.502.455-.703 1.063-.703 1.822 0 .759.25 1.366.703 1.821.501.456 1.053.709 1.706.709.702 0 1.254-.253 1.756-.709.3-.303.451-.708.502-1.265h-2.258v-.759h3.01c.05.152.05.304.05.456zm4.817-2.632h-2.86v2.024h2.56v.76h-2.56v1.973h2.86v.81h-3.662V7.337h3.662v.76zm3.413 5.567h-.803V8.096h-1.756v-.759h4.315v.76h-1.756v5.566zm4.817 0V7.337h.803v6.326h-.803zm4.365 0h-.803V8.096H64.63v-.759h4.315v.76h-1.756v5.566zm9.885-.81c-.602.658-1.355.961-2.308.961-.903 0-1.656-.303-2.308-.961a3.305 3.305 0 0 1-.903-2.328c0-.91.3-1.72.903-2.328.602-.657 1.355-.961 2.308-.961.903 0 1.656.304 2.308.961.602.658.903 1.417.903 2.328 0 .911-.3 1.67-.903 2.328zm-4.014-.557a2.297 2.297 0 0 0 1.706.709 2.38 2.38 0 0 0 1.706-.709c.452-.455.703-1.062.703-1.821 0-.709-.251-1.316-.703-1.822a2.297 2.297 0 0 0-1.706-.709 2.38 2.38 0 0 0-1.706.709c-.452.455-.703 1.063-.703 1.822 0 .759.251 1.366.703 1.821zm6.021 1.367V7.337h.954l3.01 4.909h.05l-.05-1.215V7.337h.803v6.326h-.753z">
+                                    </path>
+                                    <path fill="#FFF"
+                                        d="M71.353 22.822c-2.459 0-4.466 1.872-4.466 4.453 0 2.58 2.007 4.453 4.466 4.453s4.466-1.873 4.466-4.453c0-2.581-2.007-4.453-4.466-4.453zm0 7.185c-1.355 0-2.509-1.113-2.509-2.682 0-1.62 1.154-2.682 2.509-2.682s2.509 1.114 2.509 2.682c0 1.569-1.154 2.682-2.51 2.682zm-9.684-7.185c-2.46 0-4.466 1.872-4.466 4.453 0 2.58 2.007 4.453 4.466 4.453 2.458 0 4.465-1.873 4.465-4.453 0-2.581-2.007-4.453-4.465-4.453zm0 7.185c-1.355 0-2.51-1.113-2.51-2.682 0-1.62 1.155-2.682 2.51-2.682 1.354 0 2.508 1.114 2.508 2.682 0 1.569-1.154 2.682-2.508 2.682zm-11.541-5.82v1.873h4.516c-.15 1.063-.502 1.822-1.004 2.378-.652.658-1.656 1.367-3.462 1.367-2.76 0-4.918-2.227-4.918-5.06 0-2.834 2.158-5.06 4.918-5.06 1.505 0 2.559.606 3.362 1.366l1.304-1.316c-1.104-1.063-2.609-1.923-4.716-1.923-3.814 0-6.975 3.087-6.975 6.932 0 3.846 3.161 6.933 6.975 6.933 2.057 0 3.612-.658 4.817-1.923 1.254-1.265 1.605-2.985 1.605-4.453a7.2 7.2 0 0 0-.1-1.164h-6.322v.05zm47.167 1.468c-.351-1.012-1.505-2.833-3.814-2.833-2.258 0-4.164 1.821-4.164 4.453 0 2.48 1.856 4.453 4.415 4.453 2.007 0 3.212-1.265 3.713-1.974l-1.505-1.012c-.502.76-1.204 1.215-2.158 1.215-1.003 0-1.706-.456-2.157-1.367l5.92-2.48-.25-.455zm-6.021 1.518c-.05-1.72 1.304-2.58 2.308-2.58.752 0 1.405.404 1.656.961l-3.964 1.62zm-4.818 4.302h1.957V18.369h-1.957v13.106zm-3.21-7.641h-.051a3.105 3.105 0 0 0-2.308-1.012c-2.208 0-4.265 1.973-4.265 4.503 0 2.48 2.007 4.453 4.265 4.453 1.053 0 1.906-.455 2.308-1.012h.05v.607c0 1.72-.903 2.632-2.358 2.632-1.205 0-1.907-.86-2.208-1.569l-1.706.708c.502 1.164 1.756 2.632 3.914 2.632 2.258 0 4.215-1.366 4.215-4.656v-8.045h-1.857v.759zm-2.209 6.173c-1.355 0-2.458-1.113-2.458-2.682 0-1.568 1.103-2.732 2.458-2.732 1.305 0 2.359 1.164 2.359 2.732 0 1.518-1.054 2.682-2.359 2.682zm25.39-11.638h-4.666v13.106h1.957v-4.96h2.71c2.157 0 4.264-1.568 4.264-4.098s-2.157-4.048-4.265-4.048zm.05 6.325h-2.76V20.19h2.76c1.456 0 2.258 1.215 2.258 2.227 0 1.062-.853 2.277-2.258 2.277zm11.993-1.872c-1.405 0-2.86.607-3.462 2.024l1.706.708c.351-.708 1.054-.961 1.756-.961 1.004 0 2.007.607 2.057 1.67v.151c-.35-.202-1.104-.506-2.007-.506-1.856 0-3.763 1.012-3.763 2.935 0 1.771 1.505 2.885 3.211 2.885 1.305 0 2.007-.608 2.459-1.265h.05v1.012h1.857v-5.01c.05-2.378-1.656-3.643-3.864-3.643zm-.25 7.185c-.653 0-1.506-.303-1.506-1.113 0-1.012 1.104-1.417 2.057-1.417.853 0 1.255.202 1.756.455-.15 1.215-1.204 2.075-2.308 2.075zm11.038-6.932l-2.208 5.667H127l-2.308-5.667h-2.107l3.462 7.944-1.957 4.403h2.007l5.319-12.347h-2.158zm-17.512 8.4h1.957V18.369h-1.957v13.106z">
+                                    </path>
+                                    <path fill="url(#a)"
+                                        d="M11.29 7.894c-.301.303-.502.81-.502 1.467v23.227c0 .658.2 1.164.502 1.467l.1.05 12.896-13.004v-.304L11.39 7.843l-.1.05z">
+                                    </path>
+                                    <path fill="url(#b)"
+                                        d="M28.601 25.504l-4.315-4.352v-.304l4.315-4.352.1.05 5.069 2.936c1.455.81 1.455 2.176 0 3.036l-5.068 2.935-.1.05z">
+                                    </path>
+                                    <path fill="url(#c)"
+                                        d="M28.702 25.402l-4.416-4.453L11.29 34.055c.502.506 1.254.557 2.158.05l15.254-8.703">
+                                    </path>
+                                    <path fill="url(#d)"
+                                        d="M28.702 16.547L13.498 7.843c-.903-.506-1.706-.455-2.158.05L24.286 20.95l4.416-4.402z">
+                                    </path>
+                                    <g fill="#000">
+                                        <path
+                                            d="M28.601 25.352l-15.103 8.653c-.853.506-1.606.455-2.108 0l-.1.1.1.052c.502.455 1.255.455 2.108 0l15.204-8.704-.1-.101z"
+                                            opacity=".2"></path>
+                                        <path
+                                            d="M11.29 33.904c-.301-.304-.502-.81-.502-1.468v.152c0 .658.2 1.164.502 1.467l.1-.1-.1-.051z"
+                                            opacity=".12"></path>
+                                    </g>
+                                    <path fill="#000"
+                                        d="M33.77 22.366l-5.17 2.986.1.1 5.069-2.934c.702-.405 1.104-.961 1.104-1.518-.05.506-.452.961-1.104 1.366z"
+                                        opacity=".12"></path>
+                                    <path fill="#FFF"
+                                        d="M13.498 7.995L33.77 19.634c.652.354 1.053.86 1.104 1.366 0-.557-.352-1.113-1.104-1.518L13.498 7.843c-1.455-.81-2.66-.152-2.66 1.518v.152c0-1.67 1.205-2.328 2.66-1.518z"
+                                        opacity=".25"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a href="#" class="block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="141" height="42" viewBox="0 0 141 42">
+                                <path fill="#A5A5A5"
+                                    d="M135.932 41.923H5.369c-2.71 0-4.917-2.25-4.917-4.95V5.323c0-2.7 2.207-4.9 4.917-4.9h130.563c2.71 0 5.018 2.2 5.018 4.9v31.65c0 2.7-2.308 4.95-5.018 4.95z">
+                                </path>
+                                <path fill="#000"
+                                    d="M139.591 36.65c0 2.2-1.806 3.95-4.014 3.95H5.014C2.806 40.6 1 38.8 1 36.65V5c0-2.2 1.806-4 4.014-4h130.563c2.208 0 4.014 1.8 4.014 4v31.65z">
+                                </path>
+                                <path fill="#FFF" d="M31.813 20.923c-.05-3.35 2.76-4.95 2.86-5.05-1.556-2.3-4.014-2.6-4.867-2.6-2.058-.2-4.015 1.2-5.068 1.2-1.054 0-2.66-1.2-4.416-1.15-2.208.05-4.315 1.3-5.47 3.3-2.358 4.05-.602 10.05 1.656 13.35 1.155 1.6 2.46 3.4 4.165 3.35 1.706-.05 2.96-1.6 4.065-3.25 1.304-1.85 1.806-3.65 1.856-3.75 0-.05-3.462-1.4-3.512-5.4zm-3.312-9.8c.903-1.15 1.555-2.7 1.355-4.25-1.305.05-2.96.9-3.914 2-.853 1-1.606 2.6-1.405 4.1 1.455.1 3.01-.75 3.964-1.85zM56.3 33.073H53.94l-1.304-4.05H48.12l-1.255 4.05h-2.258l4.466-13.8h2.76l4.466 13.8zm-4.065-5.75l-1.154-3.6c-.1-.35-.351-1.25-.702-2.6h-.05c-.151.6-.352 1.45-.653 2.6l-1.154 3.6h3.713zm15.505.65c0 1.7-.451 3.05-1.355 4-.803.85-1.856 1.3-3.06 1.3-1.305 0-2.259-.45-2.86-1.4h-.05v5.25h-2.209v-10.7c0-1.05-.05-2.15-.1-3.3h1.957l.1 1.6h.05c.753-1.2 1.857-1.8 3.362-1.8 1.154 0 2.158.45 2.96 1.4.804.95 1.205 2.15 1.205 3.65zm-2.258.1c0-.95-.2-1.75-.652-2.4-.502-.65-1.104-1-1.907-1-.552 0-1.054.2-1.505.55-.452.35-.753.85-.853 1.4-.05.25-.1.5-.1.65v1.65c0 .7.2 1.35.652 1.85.451.5 1.003.75 1.756.75.853 0 1.505-.3 1.957-.95.401-.6.652-1.45.652-2.5zm13.749-.1c0 1.7-.452 3.05-1.355 4-.803.85-1.857 1.3-3.06 1.3-1.305 0-2.259-.45-2.81-1.4h-.05v5.25h-2.259v-10.7c0-1.05-.05-2.15-.1-3.3h1.957l.1 1.6h.05c.753-1.2 1.857-1.8 3.362-1.8 1.154 0 2.158.45 2.96 1.4.803.95 1.205 2.15 1.205 3.65zm-2.258.1c0-.95-.2-1.75-.652-2.4-.502-.65-1.104-1-1.907-1-.552 0-1.054.2-1.506.55-.451.35-.752.85-.853 1.4-.05.25-.1.5-.1.65v1.65c0 .7.2 1.35.652 1.85.451.5 1.003.75 1.756.75.853 0 1.505-.3 1.957-.95.401-.6.652-1.45.652-2.5zm15.103 1.15c0 1.15-.401 2.15-1.2
+                                    </svg>
+                            </a>
+                        </div>
+                        <div class=" footer-text">
+                                    © 2023 Budget Buddy. All rights reserved.
+                    </div>
+                    <img class="footer-pattern"
+                        src="https://assets.website-files.com/5e7ff3ec0c130129676d8b31/5e8006cc1262d05018697116_pattern.svg"
+                        alt="Footer Pattern">
+                </div>
+            </div>
+        </footer>
+    </div>
+    </div>
+    <!-- Authentication Modals -->
+    <div class="modal-overlay" id="authOverlay"></div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <span class="modal-close" id="closeLogin">&times;</span>
+        <h2>Welcome Back!</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <p class="modal-footer">
+            Don't have an account? <a href="#" id="openRegisterLink">Sign Up</a>
+        </p>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <span class="modal-close" id="closeRegister">&times;</span>
+        <h2>Create Account</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="registerUsername" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="registerEmail" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="registerPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+        <p class="modal-footer">
+            Already have an account? <a href="#" id="openLoginLink">Login</a>
+        </p>
+    </div>
+
+    <!-- Budget Edit Modal -->
+    <div class="modal" id="budgetModal">
+        <span class="modal-close" id="closeBudget">&times;</span>
+        <h2>Set Monthly Budget</h2>
+        <form id="budgetForm">
+            <div class="form-group">
+                <label>Budget Amount (₹)</label>
+                <input type="number" id="newBudgetInput" required min="1">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Update Budget</button>
+        </form>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Category Analysis Modal -->
+    <div class="modal large-modal" id="categoryModal">
+        <span class="modal-close" id="closeCategory">&times;</span>
+        <div class="modal-header">
+            <h2 id="categoryTitle">📊 Analysis</h2>
+            <div class="modal-header-actions">
+                <select id="filterPeriod" class="filter-select">
+                    <option value="all">All Time</option>
+                    <option value="this_month" selected>This Month</option>
+                    <option value="last_month">Last Month</option>
+                    <option value="30_days">Last 30 Days</option>
+                </select>
+                <button class="btn btn-primary btn-sm" id="addCategoryExpenseBtn">+ Add Expense</button>
+                <button class="btn btn-secondary btn-sm" id="closeCategoryHeaderBtn">Close</button>
+            </div>
+        </div>
+
+        <div class="food-dashboard">
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <h3>Total Spent</h3>
+                    <p class="stat-value" id="catTotal">₹0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Daily Average</h3>
+                    <p class="stat-value" id="catDailyAvg">₹0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Highest Day</h3>
+                    <p class="stat-value" id="catHighestDay">-</p>
+                </div>
+            </div>
+
+            <!-- Charts & List Row -->
+            <div class="dashboard-grid">
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="transaction-list-container">
+                    <h3>Recent Transactions</h3>
+                    <ul class="transaction-list" id="catTransactionList">
+                        <!-- Items will be injected here -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Add Expense Form (Hidden by default) -->
+            <div id="addCatFormContainer"
+                style="display: none; margin-top: 20px; padding: 20px; background: #f9f9f9; border-radius: 10px;">
+                <h3 id="addFormTitle">Add Expense</h3>
+                <form id="catForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Description / Type</label>
+                            <input list="catTypeOptions" id="catType" placeholder="Select or type..." required>
+                            <datalist id="catTypeOptions">
+                                <!-- Populated dynamically -->
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount (₹)</label>
+                            <input type="number" id="catAmount" required min="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="catDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes (Optional)</label>
+                            <input type="text" id="catNotes" placeholder="e.g. Lunch with friends">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Expense</button>
+                    <button type="button" class="btn btn-secondary" id="cancelAddCat">Cancel</button>
+                </form>
+            </div>
+        </div>
+        <!-- Main Close Button (Fixed Footer) -->
+        <div class="modal-footer-actions">
+            <button class="btn btn-secondary" id="closeCategoryMainBtn">Close</button>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <span class="modal-close" id="closeContact">&times;</span>
+        <h2 id="contactTitle">Contact Support</h2>
+
+        <!-- Selection View -->
+        <div id="contactOptions" class="contact-options">
+            <button class="contact-option-btn" id="aiChatBtn">
+                <span class="material-icons" style="font-size: 32px; color: #4CAF50;">smart_toy</span>
+                <div style="text-align: left;">
+                    <h3 style="margin: 0; font-size: 16px;">AI Chat Bot</h3>
+                    <p style="margin: 0; font-size: 12px; color: #666;">Get instant answers</p>
+                </div>
+            </button>
+            <button class="contact-option-btn" id="callSupportBtn">
+                <span class="material-icons" style="font-size: 32px; color: #2196F3;">support_agent</span>
+                <div style="text-align: left;">
+                    <h3 style="margin: 0; font-size: 16px;">Call Customer Care</h3>
+                    <p style="margin: 0; font-size: 12px; color: #666;">Talk to a human</p>
+                </div>
+            </button>
+        </div>
+
+        <!-- AI Chat View -->
+        <div id="aiChatView" class="contact-view" style="display: none;">
+            <div class="chat-container"
+                style="border: 1px solid #eee; padding: 10px; height: 300px; display: flex; flex-direction: column; border-radius: 8px; margin-bottom: 10px;">
+                <div class="chat-messages" id="chatMessages"
+                    style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                    <div class="message bot"
+                        style="background: #e8f5e9; padding: 8px 12px; border-radius: 12px; align-self: flex-start; max-width: 80%;">
+                        Hello! I'm Budget Buddy AI. How can I help you?</div>
+                </div>
+                <div class="chat-input-area" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <input type="text" id="chatInput" placeholder="Type your question..."
+                        style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    <button class="btn btn-primary btn-sm" id="sendMessageBtn">Send</button>
+                </div>
+            </div>
+            <button class="btn btn-secondary btn-block" id="backToOptionsFromChat">Back</button>
+        </div>
+
+        <!-- Call Support View -->
+        <div id="callSupportView" class="contact-view" style="display: none; text-align: center; padding: 20px;">
+            <span class="material-icons"
+                style="font-size: 48px; color: #4CAF50; margin-bottom: 20px;">phone_in_talk</span>
+            <h3 style="margin-bottom: 5px;">Customer Care</h3>
+            <p class="large-text" style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">+91 98765 43210</p>
+            <p style="color: #666; margin-bottom: 20px;">Available 24/7 for you.</p>
+            <a href="tel:+919876543210" class="btn btn-primary btn-block"
+                style="margin-bottom: 10px; display: inline-block;">Call Now</a>
+            <button class="btn btn-secondary btn-block" id="backToOptionsFromCall">Back</button>
+        </div>
+    </div>
+
+    <!-- Calculator Modal -->
+    <div class="modal" id="calculatorModal" style="max-width: 600px;">
+        <span class="modal-close" id="closeCalculator">&times;</span>
+        <h2 style="color: #1a5e3a; text-align: center; margin-bottom: 20px;">Calculator</h2>
+
+        <!-- Tabs -->
+        <div class="calc-tabs" style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #eee;">
+            <button class="calc-tab active" id="tabSummary"
+                style="flex: 1; padding: 10px; background: none; border: none; font-weight: 600; color: #1a5e3a; border-bottom: 2px solid #1a5e3a; cursor: pointer;">Summary</button>
+            <button class="calc-tab" id="tabPlanner"
+                style="flex: 1; padding: 10px; background: none; border: none; font-weight: 600; color: #777; border-bottom: 2px solid transparent; cursor: pointer;">Budget
+                Planner</button>
+        </div>
+
+        <!-- Summary View (Active by default) -->
+        <div id="calcSummaryView">
+            <div
+                style="background: #f1f8e9; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; border: 1px solid #c8e6c9;">
+                <p style="color: #555; margin-bottom: 5px; font-weight: 500;">Total Monthly Spending</p>
+                <h1 id="calcTotalAmount" style="color: #2e7d32; font-size: 36px; margin: 0;">₹0</h1>
+            </div>
+
+            <div class="category-breakdown-list">
+                <h3
+                    style="font-size: 16px; color: #333; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+                    Category Breakdown</h3>
+                <ul id="calcCategoryList" style="list-style: none; padding: 0;">
+                    <!-- Filled via JS -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Planner View (Hidden by default) -->
+        <div id="calcPlannerView" style="display: none;">
+            <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 15px;">Enter values to simulate a
+                month's budget.</p>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>Monthly Allowance (₹)</label>
+                <input type="number" id="planAllowance" value="5000"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group">
+                    <label>Food (₹)</label>
+                    <input type="number" class="plan-input" id="planFood" placeholder="0"
+                        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div class="form-group">
+                    <label>Travel (₹)</label>
+                    <input type="number" class="plan-input" id="planTravel" placeholder="0"
+                        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div class="form-group">
+                    <label>Bills (₹)</label>
+                    <input type="number" class="plan-input" id="planBills" placeholder="0"
+                        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div class="form-group">
+                    <label>Subscriptions (₹)</label>
+                    <input type="number" class="plan-input" id="planSubs" placeholder="0"
+                        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="btnCalculatePlan" style="margin-top: 20px;">Calculate
+                Remaining</button>
+
+            <!-- Result Box -->
+            <div id="planResult"
+                style="margin-top: 20px; padding: 15px; border-radius: 8px; background: #fafafa; border: 1px solid #eee; display: none;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>Total Expenses:</span>
+                    <strong id="planTotalExp">₹0</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 18px; color: #1a5e3a;">
+                    <span>Remaining:</span>
+                    <strong id="planRemaining">₹0</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Day Details Modal (Heatmap Click) -->
+    <div class="modal" id="dayDetailsModal">
+        <span class="modal-close" id="closeDayDetails">&times;</span>
+        <h2 id="dayDetailsTitle" style="color: #1a5e3a; text-align: center; margin-bottom: 20px;">Details</h2>
+        <div id="dayDetailsContent" style="max-height: 400px; overflow-y: auto;">
+            <!-- Transaction List -->
+            <ul class="transaction-list" id="dayTransactionList"></ul>
+        </div>
+    </div>
+
+    <!-- Auth Overlay -->
+    <div class="auth-overlay" id="authOverlay"></div>
+
+    <!-- Category Bar Chart Modal -->
+    <div class="modal" id="barChartModal" style="max-width: 800px;">
+        <span class="modal-close" id="closeBarChart">&times;</span>
+        <h2 style="color: #1a5e3a; text-align: center; margin-bottom: 20px;">Detailed Category Analysis</h2>
+        <div style="position: relative; height: 400px; width: 100%;">
+            <canvas id="categoryBarChartCanvas"></canvas>
+        </div>
+    </div>
+
+    <!-- Smart Track (AI UPI) Modal -->
+    <div class="modal" id="smartTrackModal"
+        style="max-width: 600px; padding: 0; overflow: hidden; border-radius: 16px;">
+        <style>
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 44px;
+                height: 24px;
+            }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+                border-radius: 34px;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 18px;
+                width: 18px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: .4s;
+                border-radius: 50%;
+            }
+
+            input:checked+.slider {
+                background-color: #4caf50;
+            }
+
+            input:checked+.slider:before {
+                transform: translateX(20px);
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .spin-icon {
+                animation: spin 1s linear infinite;
+            }
+        </style>
+        <div
+            style="background: linear-gradient(135deg, #673ab7, #512da8); padding: 30px 25px; color: white; position: relative;">
+            <span class="modal-close" id="closeSmartTrack"
+                style="color: white; opacity: 0.8; top: 15px; right: 20px;">&times;</span>
+            <div style="text-align: center;">
+                <div
+                    style="background: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto;">
+                    <span class="material-icons" style="font-size: 40px; color: white;">auto_awesome</span>
+                </div>
+                <h2 style="color: white; margin: 0; font-size: 24px; font-weight: 700;">Smart Track AI</h2>
+                <p style="color: rgba(255,255,255,0.9); font-size: 14px; margin-top: 5px;">Automate your finances with
+                    Intelligence</p>
+            </div>
+        </div>
+
+        <div id="smartTrackMainView" style="padding: 25px;">
+            <div
+                style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #673ab7; display: flex; gap: 10px;">
+                <span class="material-icons" style="color: #673ab7;">info</span>
+                <p style="margin: 0; font-size: 13px; color: #4a148c; line-height: 1.4;">
+                    <strong>How it works:</strong> Securely link your accounts. Our AI fetches transactions, categorizes
+                    them instantly, and syncs your dashboard in real-time.
+                </p>
+            </div>
+
+            <div class="step-container" style="display: flex; flex-direction: column; gap: 15px;">
+                <!-- Connect Bank -->
+                <div class="step-item" id="stepConnectBank"
+                    style="display: flex; gap: 15px; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 12px; transition: all 0.3s; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+                    <div
+                        style="background: #e1bee7; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #4a148c;">
+                        <span class="material-icons">account_balance</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <strong style="display: block; font-size: 15px; color: #333;">Connect Bank / UPI</strong>
+                        <span class="status-text" style="font-size: 12px; color: #777;">Link your accounts
+                            securely.</span>
+                    </div>
+                    <button class="btn btn-sm" id="btnConnectBank"
+                        style="background: #673ab7; color: white; border-radius: 20px; padding: 6px 16px; font-size: 12px; transition: transform 0.2s;">
+                        Connect
+                    </button>
+                    <span class="material-icons check-icon" style="color: #4caf50; display: none;">check_circle</span>
+                </div>
+
+                <!-- AI Categorization -->
+                <div class="step-item" id="stepAiCat"
+                    style="display: flex; gap: 15px; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 12px; transition: all 0.3s; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+                    <div
+                        style="background: #bbdefb; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1565c0;">
+                        <span class="material-icons">category</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <strong style="display: block; font-size: 15px; color: #333;">AI Categorization</strong>
+                        <span class="status-text" style="font-size: 12px; color: #777;">Auto-tag expenses (e.g. Uber,
+                            Zomato).</span>
+                    </div>
+                    <label class="switch" style="position: relative; display: inline-block; width: 40px; height: 20px;">
+                        <input type="checkbox" id="toggleAiCat">
+                        <span class="slider round"
+                            style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px;"></span>
+                    </label>
+                </div>
+
+                <!-- Real-time Sync -->
+                <div class="step-item" id="stepRealTime"
+                    style="display: flex; gap: 15px; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 12px; transition: all 0.3s; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+                    <div
+                        style="background: #ffe0b2; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ef6c00;">
+                        <span class="material-icons">sync</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <strong style="display: block; font-size: 15px; color: #333;">Real-time Sync</strong>
+                        <span class="status-text" id="syncStatusText" style="font-size: 12px; color: #777;">Last synced:
+                            Never</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline" id="btnSyncNow"
+                        style="border: 1px solid #ef6c00; color: #ef6c00; background: transparent; border-radius: 20px; padding: 6px 16px; font-size: 12px;">
+                        Sync Now
+                    </button>
+                    <span class="material-icons spin-icon" id="syncSpinner"
+                        style="display: none; color: #ef6c00; animation: spin 1s linear infinite;">sync</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
+                <p
+                    style="font-size: 11px; color: #bbb; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                    <span class="material-icons" style="font-size: 14px;">lock</span> 256-bit Encryption • RBI Account
+                    Aggregator Compliant • Read-only Access
+                </p>
+            </div>
+        </div>
+
+        <!-- View 2: UPI Details Form (Hidden by default) -->
+        <div id="smartTrackUpiView" style="display: none; padding: 25px;">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h3 style="color: #333; margin-bottom: 10px;">Link Bank Account</h3>
+                <p style="color: #666; font-size: 14px;">Enter your UPI details to fetch transaction history safely.</p>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #555;">UPI ID (VPA)</label>
+                <div style="position: relative;">
+                    <input type="text" id="inputUpiId" placeholder="e.g. mobile@upl"
+                        style="width: 100%; padding: 12px 12px 12px 40px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px;">
+                    <span class="material-icons"
+                        style="position: absolute; left: 10px; top: 12px; color: #888;">fingerprint</span>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 30px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #555;">Select Bank</label>
+                <div style="position: relative;">
+                    <select id="inputBankName"
+                        style="width: 100%; padding: 12px 12px 12px 40px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; background: white; appearance: none;">
+                        <option value="hdfc">HDFC Bank</option>
+                        <option value="sbi">SBI</option>
+                        <option value="icici">ICICI Bank</option>
+                        <option value="axis">Axis Bank</option>
+                        <option value="paytm">Paytm Payments Bank</option>
+                    </select>
+                    <span class="material-icons"
+                        style="position: absolute; left: 10px; top: 12px; color: #888;">account_balance</span>
+                    <span class="material-icons"
+                        style="position: absolute; right: 10px; top: 12px; color: #888; pointer-events: none;">expand_more</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <button class="btn btn-secondary" id="btnBackToMain"
+                    style="flex: 1; border-color: #ddd; color: #666;">Back</button>
+                <button class="btn btn-primary" id="btnLinkAccount"
+                    style="flex: 2; background-color: #673ab7; border: none;">Link & Continue</button>
+            </div>
+
+            <p style="font-size: 11px; color: #999; text-align: center; margin-top: 20px;">
+                By clicking continue, you verify that you are the owner of this UPI ID.
+            </p>
+        </div>
+    </div>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- Removed food-details.js -->
+    <script src="js/category-analytics.js"></script>
+</body>
+
+</html>
