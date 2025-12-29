@@ -59,10 +59,11 @@
                     <div class="sidebar-profile-email" id="sidebarEmail">john.doe@example.com</div>
                 </div>
             </div>
-            <div class="sidebar-login" id="sidebarLoginSection">
-                <button class="btn btn-primary btn-block"
-                    onclick="document.getElementById('loginModal').classList.add('active'); document.getElementById('authOverlay').classList.add('active'); toggleSidebar();">Login
-                    / Sign Up</button>
+            <!-- Login Section Removed as requested -->
+            <div class="sidebar-login" id="sidebarLogoutSection" style="display: none;">
+                <button class="sidebar-logout-btn" id="sidebarLogoutBtn">
+                    <span class="material-icons">logout</span> Logout
+                </button>
             </div>
         </div>
     </div>
@@ -111,8 +112,26 @@
                 </div>
                 <div id="userProfile" style="display: none;">
                     <span class="user-greeting">Hi, <span id="usernameDisplay">User</span></span>
-                    <button class="nav-btn logout-btn" id="navLogoutBtn">Logout</button>
+                    <button class="nav-btn profile-avatar-btn" id="navProfileBtn" title="My Profile">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User Avatar" id="navProfileImage">
+                    </button>
+                    <!-- Logout button removed as requested -->
                 </div>
+
+                <!-- Language Switcher -->
+                <div class="language-dropdown-container">
+                    <button class="lang-btn" id="langBtn" title="Change Language">
+                        <span class="material-icons">language</span>
+                        <span class="lang-code">EN</span>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <div class="lang-item active" data-lang="en">🇺🇸 English</div>
+                        <div class="lang-item" data-lang="hi">🇮🇳 हिन्दी</div>
+                        <div class="lang-item" data-lang="es">🇪🇸 Español</div>
+                        <div class="lang-item" data-lang="fr">🇫🇷 Français</div>
+                    </div>
+                </div>
+
                 <span class="material-icons theme-toggle">dark_mode</span>
             </div>
         </nav>
@@ -719,6 +738,35 @@
         </form>
     </div>
 
+    <!-- User Profile Modal -->
+    <div class="modal" id="profileModal">
+        <span class="modal-close" id="closeProfile">&times;</span>
+        <div class="profile-modal-content">
+            <div class="profile-header">
+                <div class="profile-avatar-large" id="profileAvatar">U</div>
+                <h2 id="profileName">User Name</h2>
+                <p id="profileEmail">user@example.com</p>
+                <div class="profile-since">Member since <span id="profileJoinDate">Dec 2023</span></div>
+            </div>
+
+            <div class="profile-stats">
+                <div class="profile-stat-item">
+                    <span class="stat-label">Monthly Budget</span>
+                    <span class="stat-value" id="profileBudget">₹0</span>
+                </div>
+                <div class="profile-stat-item">
+                    <span class="stat-label">Total Spent</span>
+                    <span class="stat-value" id="profileTotalSpent">₹0</span>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="btn btn-secondary btn-block" id="editProfileBtn">Edit Profile</button>
+                <button class="btn btn-danger btn-block" id="modalLogoutBtn">Logout</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
 
@@ -1174,6 +1222,7 @@
 
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/script.js"></script>
     <script src="js/auth.js"></script>
     <!-- Removed food-details.js -->

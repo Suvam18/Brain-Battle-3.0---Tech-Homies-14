@@ -103,7 +103,7 @@ async function fetchDashboardData() {
     if (!token) return;
 
     try {
-        const res = await fetch('/api/analytics/overview', {
+        const res = await fetch(`${API_BASE_URL}/api/analytics/overview`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const responseData = await res.json();
@@ -548,7 +548,7 @@ async function showDayDetails(dateStr) {
         const start = `${dateStr}T00:00:00.000Z`;
         const end = `${dateStr}T23:59:59.999Z`;
 
-        const res = await fetch(`/api/expenses?startDate=${start}&endDate=${end}`, {
+        const res = await fetch(`${API_BASE_URL}/api/expenses?startDate=${start}&endDate=${end}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const responseData = await res.json();
