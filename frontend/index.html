@@ -23,7 +23,7 @@
         <div class="sidebar-header">
             <div class="sidebar-brand">
                 <span class="material-icons">account_balance_wallet</span>
-                Budget Buddy
+                <span data-i18n="sidebar.brand">Budget Buddy</span>
             </div>
             <div class="sidebar-close" id="sidebarClose">
                 <span class="material-icons">close</span>
@@ -32,23 +32,23 @@
         <div class="sidebar-menu">
             <a href="#hero" class="sidebar-menu-item active" onclick="toggleSidebar()">
                 <span class="material-icons">dashboard</span>
-                Dashboard
+                <span data-i18n="sidebar.dashboard">Dashboard</span>
             </a>
             <a href="#expenses-section" class="sidebar-menu-item" onclick="toggleSidebar()">
                 <span class="material-icons">receipt_long</span>
-                Expenses
+                <span data-i18n="sidebar.expenses">Expenses</span>
             </a>
             <a href="#budget-section" class="sidebar-menu-item" onclick="toggleSidebar()">
                 <span class="material-icons">account_balance</span>
-                Budget
+                <span data-i18n="sidebar.budget">Budget</span>
             </a>
             <a href="#insights-section" class="sidebar-menu-item" onclick="toggleSidebar()">
                 <span class="material-icons">insights</span>
-                Insights
+                <span data-i18n="sidebar.insights">Insights</span>
             </a>
             <a href="#" class="sidebar-menu-item" id="sidebarProfileLink">
                 <span class="material-icons">person</span>
-                Profile
+                <span data-i18n="sidebar.profile">Profile</span>
             </a>
         </div>
         <div class="sidebar-footer">
@@ -81,37 +81,40 @@
                 </div>
                 <div class="brand">
                     <span class="material-icons">account_balance_wallet</span>
-                    Budget Buddy
+                    <span data-i18n="sidebar.brand">Budget Buddy</span>
                 </div>
             </div>
             <div class="navbar-center">
-                <a href="#" class="navbar-link">Home</a>
+                <a href="#" class="navbar-link" data-i18n="nav.home">Home</a>
                 <div class="nav-item-dropdown">
-                    <a href="#" class="navbar-link" id="featuresDropdownToggle">Features <span class="material-icons"
+                    <a href="#" class="navbar-link" id="featuresDropdownToggle"><span
+                            data-i18n="nav.features">Features</span> <span class="material-icons"
                             style="font-size: 16px;">expand_more</span></a>
                     <div class="dropdown-menu" id="featuresDropdownMenu">
                         <a href="#expenses-section" class="dropdown-item"><span class="material-icons">receipt</span>
-                            Expense Tracking</a>
+                            <span data-i18n="features.expensetracking">Expense Tracking</span></a>
                         <a href="#insights-section" class="dropdown-item"><span class="material-icons">category</span>
-                            Automatic Categorization</a>
+                            <span data-i18n="features.categorization">Automatic Categorization</span></a>
                         <a href="#budget-section" class="dropdown-item"><span class="material-icons">savings</span>
-                            Monthly Budget Planning</a>
+                            <span data-i18n="features.budgetplanning">Monthly Budget Planning</span></a>
                         <a href="#insights-section" class="dropdown-item"><span class="material-icons">bar_chart</span>
-                            Visual Reports & Analytics</a>
-                        <a href="#" class="dropdown-item"><span class="material-icons">notifications</span> Alerts and
-                            Notifications</a>
+                            <span data-i18n="features.reports">Visual Reports & Analytics</span></a>
+                        <a href="#" class="dropdown-item"><span class="material-icons">notifications</span> <span
+                                data-i18n="features.alerts">Alerts and
+                                Notifications</span></a>
                     </div>
                 </div>
-                <a href="#" class="navbar-link" id="calculatorLink">Calculators</a>
-                <a href="#" class="navbar-link" id="contactLink">Contact Us</a>
+                <a href="#" class="navbar-link" id="calculatorLink" data-i18n="nav.calculators">Calculators</a>
+                <a href="#" class="navbar-link" id="contactLink" data-i18n="nav.contact">Contact Us</a>
             </div>
             <div class="navbar-right">
                 <div id="authButtons">
-                    <button class="nav-btn login-btn" id="navLoginBtn">Login</button>
-                    <button class="nav-btn signin-btn" id="navRegisterBtn">Sign Up</button>
+                    <button class="nav-btn login-btn" id="navLoginBtn" data-i18n="nav.login">Login</button>
+                    <button class="nav-btn signin-btn" id="navRegisterBtn" data-i18n="nav.signup">Sign Up</button>
                 </div>
                 <div id="userProfile" style="display: none;">
-                    <span class="user-greeting">Hi, <span id="usernameDisplay">User</span></span>
+                    <span class="user-greeting"><span data-i18n="nav.hi">Hi</span>, <span
+                            id="usernameDisplay">User</span></span>
                     <button class="nav-btn profile-avatar-btn" id="navProfileBtn" title="My Profile">
                         <img src="https://i.pravatar.cc/150?img=12" alt="User Avatar" id="navProfileImage">
                     </button>
@@ -146,14 +149,17 @@
                         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero1.jpg');">
                     </div>
                     <div class="hero-content">
-                        <h1 class="hero-title slide-animate">Smart Budgeting 📝</h1>
-                        <p class="hero-subtitle slide-animate delay-1">Plan your expenses and stick to your goals.
+                        <h1 class="hero-title slide-animate" data-i18n="hero.slide1.title">Smart Budgeting 📝</h1>
+                        <p class="hero-subtitle slide-animate delay-1" data-i18n="hero.slide1.subtitle">Plan your
+                            expenses and stick to your goals.
                         </p>
                         <div class="hero-buttons slide-animate delay-2"
                             style="display: flex; gap: 15px; justify-content: center;">
-                            <button class="btn btn-primary" id="btnHeroGetStarted"><span>Get Started</span></button>
+                            <button class="btn btn-primary" id="btnHeroGetStarted"><span
+                                    data-i18n="hero.btn.getstarted">Get Started</span></button>
                             <button class="btn btn-secondary ai-track-btn" onclick="openSmartTrackModal()">
-                                <span class="material-icons">auto_awesome</span> Smart Track
+                                <span class="material-icons">auto_awesome</span> <span
+                                    data-i18n="hero.btn.smarttrack">Smart Track</span>
                             </button>
                         </div>
                     </div>
@@ -165,12 +171,15 @@
                         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero2.jpg');">
                     </div>
                     <div class="hero-content">
-                        <h1 class="hero-title">Save More 💰</h1>
-                        <p class="hero-subtitle">Every coin saved is a future dream earned.</p>
+                        <h1 class="hero-title" data-i18n="hero.slide2.title">Save More 💰</h1>
+                        <p class="hero-subtitle" data-i18n="hero.slide2.subtitle">Every coin saved is a future dream
+                            earned.</p>
                         <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center;">
-                            <button class="btn btn-primary" id="btnHeroStartSaving"><span>Start Saving</span></button>
+                            <button class="btn btn-primary" id="btnHeroStartSaving"><span
+                                    data-i18n="hero.btn.startsaving">Start Saving</span></button>
                             <button class="btn btn-secondary ai-track-btn" onclick="openSmartTrackModal()">
-                                <span class="material-icons">auto_awesome</span> Smart Track
+                                <span class="material-icons">auto_awesome</span> <span
+                                    data-i18n="hero.btn.smarttrack">Smart Track</span>
                             </button>
                         </div>
                     </div>
@@ -182,12 +191,15 @@
                         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero3.jpg');">
                     </div>
                     <div class="hero-content">
-                        <h1 class="hero-title">Track Taxes & Bills 📄</h1>
-                        <p class="hero-subtitle">Never miss a deadline. Keep your records organized.</p>
+                        <h1 class="hero-title" data-i18n="hero.slide3.title">Track Taxes & Bills 📄</h1>
+                        <p class="hero-subtitle" data-i18n="hero.slide3.subtitle">Never miss a deadline. Keep your
+                            records organized.</p>
                         <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center;">
-                            <button class="btn btn-primary" id="btnHeroTrackNow"><span>Track Now</span></button>
+                            <button class="btn btn-primary" id="btnHeroTrackNow"><span
+                                    data-i18n="hero.btn.tracknow">Track Now</span></button>
                             <button class="btn btn-secondary ai-track-btn" onclick="openSmartTrackModal()">
-                                <span class="material-icons">auto_awesome</span> Smart Track
+                                <span class="material-icons">auto_awesome</span> <span
+                                    data-i18n="hero.btn.smarttrack">Smart Track</span>
                             </button>
                         </div>
                     </div>
@@ -199,14 +211,17 @@
                         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero4.jpg');">
                     </div>
                     <div class="hero-content">
-                        <h1 class="hero-title">Mobile Access 📱</h1>
-                        <p class="hero-subtitle">Manage your budget anytime, anywhere.</p>
+                        <h1 class="hero-title" data-i18n="hero.slide4.title">Mobile Access 📱</h1>
+                        <p class="hero-subtitle" data-i18n="hero.slide4.subtitle">Manage your budget anytime, anywhere.
+                        </p>
                         <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center;">
                             <a href="#" class="btn btn-primary" id="btnHeroDownloadApp"
-                                style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;"><span>Download
+                                style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;"><span
+                                    data-i18n="hero.btn.downloadapp">Download
                                     App</span></a>
                             <button class="btn btn-secondary ai-track-btn" onclick="openSmartTrackModal()">
-                                <span class="material-icons">auto_awesome</span> Smart Track
+                                <span class="material-icons">auto_awesome</span> <span
+                                    data-i18n="hero.btn.smarttrack">Smart Track</span>
                             </button>
                         </div>
                     </div>
@@ -1223,6 +1238,7 @@
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/script.js"></script>
     <script src="js/auth.js"></script>
     <!-- Removed food-details.js -->

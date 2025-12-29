@@ -1,6 +1,6 @@
 // Generic Category Analytics Logic
 
-const API_TRANSACTIONS_URL = '/api/expenses';
+const API_TRANSACTIONS_URL = `${API_BASE_URL}/api/expenses`;
 let categoryChartInstance = null;
 let currentCategory = ''; // 'Food', 'Travel', etc.
 
@@ -505,7 +505,7 @@ async function updateTopSpending() {
 
     try {
         try {
-            const res = await fetch('/api/analytics/overview', {
+            const res = await fetch(`${API_BASE_URL}/api/analytics/overview`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const responseData = await res.json();

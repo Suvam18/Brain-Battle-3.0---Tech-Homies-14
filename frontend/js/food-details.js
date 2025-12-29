@@ -1,6 +1,6 @@
 // Food Details Logic
 
-const FOOD_API_URL = '/api/transactions';
+const FOOD_API_URL = `${API_BASE_URL}/api/transactions`;
 let foodChartInstance = null;
 let allTransactions = [];
 

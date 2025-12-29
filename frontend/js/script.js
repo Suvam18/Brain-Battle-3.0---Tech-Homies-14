@@ -62,9 +62,10 @@ if (langBtn && langMenu) {
             // Close menu
             langMenu.classList.remove('active');
 
-            // Optional: Persist selection or trigger translation
-            console.log(`Language switched to: ${code}`);
-            // Here you would call your i18n function
+            // Switch language using i18n module
+            if (typeof window.switchLanguage === 'function') {
+                window.switchLanguage(item.getAttribute('data-lang'));
+            }
         });
     });
 }
@@ -684,7 +685,7 @@ if (budgetForm) {
         if (!token) return;
 
         try {
-            const res = await fetch('/api/users/me', {
+            const res = await fetch(`${API_BASE_URL}/api/users/me`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
