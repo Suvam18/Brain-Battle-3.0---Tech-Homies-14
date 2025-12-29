@@ -27,8 +27,47 @@ if (sidebarOverlay) {
 }
 
 // Features Dropdown Logic
-const featuresDropdownToggle = document.getElementById('featuresDropdownToggle');
-const featuresDropdownMenu = document.getElementById('featuresDropdownMenu');
+
+// --- Language Switcher Logic ---
+const langBtn = document.getElementById('langBtn');
+const langMenu = document.getElementById('langMenu');
+const langItems = document.querySelectorAll('.lang-item');
+const langCodeDisplay = document.querySelector('.lang-code');
+
+if (langBtn && langMenu) {
+    langBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        langMenu.classList.toggle('active');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+            langMenu.classList.remove('active');
+        }
+    });
+
+    langItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Remove active class from all
+            langItems.forEach(i => i.classList.remove('active'));
+            // Add to clicked
+            item.classList.add('active');
+
+            // Update Display
+            const code = item.getAttribute('data-lang').toUpperCase();
+            if (langCodeDisplay) langCodeDisplay.textContent = code;
+
+            // Close menu
+            langMenu.classList.remove('active');
+
+            // Optional: Persist selection or trigger translation
+            console.log(`Language switched to: ${code}`);
+            // Here you would call your i18n function
+        });
+    });
+}
 
 if (featuresDropdownToggle && featuresDropdownMenu) {
     featuresDropdownToggle.addEventListener('click', (e) => {
