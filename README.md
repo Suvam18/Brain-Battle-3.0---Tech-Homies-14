@@ -22,7 +22,8 @@ Secure backend with database storage
 
 
 🛠 Tech Stack
---Frontend--
+
+---------Frontend---------
 
 
 HTML
@@ -34,7 +35,7 @@ CSS
 JavaScript
 
 
---Backend--
+---------Backend----------
 
 
 Node.js
@@ -43,7 +44,7 @@ Node.js
 Express.js
 
 
-Database
+--------Database---------
 
 
 MongoDB
