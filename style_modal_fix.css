@@ -1,0 +1,38 @@
+/* Food Details Modal Layout Updates */
+.large-modal {
+    max-width: 900px;
+    width: 95%;
+    height: 90vh;
+    padding: 0;
+    display: flex;
+    /* Flexbox for layout */
+    flex-direction: column;
+    overflow: hidden;
+    /* Prevent body scroll */
+}
+
+/* Header is already sticky in existing CSS, but flex is safer */
+.modal-header {
+    flex-shrink: 0;
+    /* Don't shrink */
+}
+
+/* Scrollable Content */
+.food-dashboard {
+    padding: 20px;
+    overflow-y: auto;
+    /* Scroll ONLY the dashboard */
+    flex-grow: 1;
+    /* Take remaining space */
+}
+
+/* Fixed Footer */
+.modal-footer-actions {
+    flex-shrink: 0;
+    /* Don't shrink */
+    background: white;
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    text-align: right;
+    z-index: 10;
+}
