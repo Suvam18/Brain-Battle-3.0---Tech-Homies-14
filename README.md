@@ -125,20 +125,3 @@ Budget limit alerts
 
 📄 License
 This project is licensed under the MIT License.
-
-If you want, I can also:
-
-
-Customize it for college submission
-
-
-Make it shorter or more professional
-
-
-Add API documentation
-
-
-Add deployment steps
-
-
-Just tell me 👍
