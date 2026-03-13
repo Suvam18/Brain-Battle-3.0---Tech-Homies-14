@@ -1,22 +1,19 @@
-# Brain-Battle-3.0---Tech-Homies-14
-.
-
 💰 Budget Buddy – Student Expense Tracker
-📌 Project Title
+📌 Project Title----
 
 Budget Buddy – A Smart Expense Tracker for Students
 
-📖 Description
+📖 Description----
 
 Budget Buddy is a simple and user-friendly expense tracking web application designed especially for students. It helps students record their daily expenses, categorize spending, and manage their limited budget effectively.
 
 Many students struggle to track where their money goes. Budget Buddy solves this problem by providing a clean dashboard to add, view, and manage expenses easily.
 
-❗ Problem Statement
+❗ Problem Statement-----
 
 Students often face difficulty managing their daily expenses. Without proper tracking, they may overspend or lose control over their monthly budget.
 
-💡 Proposed Solution
+💡 Proposed Solution----
 
 Budget Buddy allows students to:
 
@@ -30,7 +27,7 @@ Track total spending
 
 This helps students become more financially aware and develop better money management habits.
 
-🚀 Features
+🚀 Features------
 
 Add new expenses quickly
 
@@ -44,7 +41,7 @@ Simple and clean user interface
 
 Mobile-friendly design
 
-🛠 Tech Stack
+🛠 Tech Stack-------
 
 Frontend
 
@@ -60,7 +57,7 @@ Git & GitHub
 
 Vercel (for deployment)
 
-🏗 Architecture Overview
+🏗 Architecture Overview------
 User Interface (HTML, CSS)
         │
         ▼
@@ -74,7 +71,7 @@ Local Storage
 
 This project uses Browser Local Storage to store expense data temporarily. No external database is required.
 
-📊 Example Use Case
+📊 Example Use Case------
 
 A student opens Budget Buddy.
 
@@ -84,7 +81,7 @@ Adds another expense ₹50 for travel.
 
 The app automatically calculates the total spending.
 
-📈 Benefits
+📈 Benefits-------
 
 Helps students manage money
 
@@ -94,7 +91,7 @@ Simple and easy to use
 
 No login required
 
-🔮 Future Scope
+🔮 Future Scope------
 
 Monthly budget limit feature
 
@@ -106,8 +103,9 @@ Mobile app version
 
 Export expense reports
 
-👨‍💻 Author
+👨‍💻 Author---
 
 Suvam Chatterjee
 B.Tech IT Student
 University Institute of Technology, Burdwan University
+
