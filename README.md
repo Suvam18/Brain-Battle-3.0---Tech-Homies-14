@@ -3,6 +3,9 @@
 
 Budget Buddy – A Smart Expense Tracker for Students
 
+<img width="1920" height="1080" alt="Screenshot 2026-05-01 102330" src="https://github.com/user-attachments/assets/eac4e19c-cb47-4ee6-8273-1f6d9656eef5" />
+
+
 📖 Description----
 
 Budget Buddy is a simple and user-friendly expense tracking web application designed especially for students. It helps students record their daily expenses, categorize spending, and manage their limited budget effectively.
