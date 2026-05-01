@@ -298,13 +298,10 @@ function updateAuthUI(user) {
         }
 
         // Update Navbar Avatar Image (Optional: generate deterministic avatar)
-        const navProfileImage = document.getElementById('navProfileImage');
-        if (navProfileImage) {
-            // Use a consistent random seed based on email or name if available, else static random
-            const seed = user.email || user.fullName || 'default';
-            // prevent forced cache by appending seed
-            // Using pravatar or similar service
-            navProfileImage.src = `https://i.pravatar.cc/150?u=${encodeURIComponent(seed)}`;
+        const navProfileAvatar = document.getElementById('navProfileAvatar');
+        if (navProfileAvatar) {
+            const initial = user.fullName ? user.fullName.charAt(0).toUpperCase() : 'U';
+            navProfileAvatar.textContent = initial;
         }
 
         // Update Sidebar

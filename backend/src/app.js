@@ -14,7 +14,7 @@ const path = require('path');
 const app = express();
 
 // Serve static files from the frontend directory
-app.use(express.static(path.join(__dirname, '../../frontend')));
+app.use(express.static(path.join(__dirname, '../../')));
 
 // Middleware
 app.use(express.json());

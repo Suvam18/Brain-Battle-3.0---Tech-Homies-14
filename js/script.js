@@ -282,40 +282,76 @@ function updateDashboardUI(data) {
         updateFeatureSectionMeta(data.categoryBreakdown, monthlyBudget);
     }
 
+    // 5. Top 4 Spending Areas
+    if (data.topCategories) {
+        updateTopSpendingUI(data.topCategories);
+    }
+
     updateSidebarProfile();
+}
+
+function updateTopSpendingUI(topCategories) {
+    const listContainer = document.querySelector('.spending-list');
+    if (!listContainer) return;
+
+    listContainer.innerHTML = '';
+    if (topCategories.length === 0) {
+        listContainer.innerHTML = '<li class="spending-item" style="justify-content:center;">No data yet</li>';
+        return;
+    }
+
+    topCategories.forEach((item, index) => {
+        const name = item._id;
+        const amount = item.total;
+
+        const li = document.createElement('li');
+        li.className = 'spending-item';
+        li.style.cursor = 'pointer';
+        // Open category details if global function exists
+        if (typeof window.openCategory === 'function') {
+            li.onclick = () => window.openCategory(name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
+        }
+
+        li.innerHTML = `
+            <div class="spending-number">${index + 1}</div>
+            <span>${name}</span>
+            <span style="margin-left:auto; font-weight:600;">₹${amount.toLocaleString()}</span>
+        `;
+        listContainer.appendChild(li);
+    });
 }
 
 function updateSidebarProfile() {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const sidebarProfileSection = document.getElementById('sidebarProfileSection');
-    const sidebarLoginSection = document.getElementById('sidebarLoginSection');
+    const sidebarLogoutSection = document.getElementById('sidebarLogoutSection');
     const sidebarName = document.getElementById('sidebarName');
     const sidebarEmail = document.getElementById('sidebarEmail');
     const sidebarAvatar = document.getElementById('sidebarAvatar');
     const sidebarProfileLink = document.getElementById('sidebarProfileLink');
 
-    if (token && user && user.name) {
+    if (token && user && user.fullName) {
         // Logged In
         if (sidebarProfileSection) sidebarProfileSection.style.display = 'flex';
-        if (sidebarLoginSection) sidebarLoginSection.style.display = 'none';
+        if (sidebarLogoutSection) sidebarLogoutSection.style.display = 'block';
 
-        if (sidebarName) sidebarName.textContent = user.name;
+        if (sidebarName) sidebarName.textContent = user.fullName;
         if (sidebarEmail) sidebarEmail.textContent = user.email || '';
-        if (sidebarAvatar) sidebarAvatar.textContent = user.name.charAt(0).toUpperCase();
+        if (sidebarAvatar) sidebarAvatar.textContent = user.fullName.charAt(0).toUpperCase();
 
         if (sidebarProfileLink) {
             sidebarProfileLink.onclick = (e) => {
                 e.preventDefault();
                 // Toggle Sidebar or go to generic profile (for now just close)
                 toggleSidebar();
-                alert(`Logged in as ${user.name}`);
+                // alert(`Logged in as ${user.fullName}`);
             };
         }
     } else {
         // Logged Out
         if (sidebarProfileSection) sidebarProfileSection.style.display = 'none';
-        if (sidebarLoginSection) sidebarLoginSection.style.display = 'block';
+        if (sidebarLogoutSection) sidebarLogoutSection.style.display = 'none';
 
         if (sidebarProfileLink) {
             sidebarProfileLink.onclick = (e) => {
@@ -383,10 +419,11 @@ function renderDashboardChart(breakdownData) {
 
     // Mapping for standard categories
     const colorMap = {
-        'FOOD': '#4caf50',
-        'TRAVEL': '#ff9800',
-        'BILLS': '#2196f3',
-        'SUBSCRIPTIONS': '#9c27b0'
+        'FOOD': '#22c55e',          // Green
+        'TRAVEL': '#f97316',        // Orange
+        'BILLS': '#ef4444',         // Red
+        'SUBSCRIPTIONS': '#8b5cf6', // Violet
+        'OTHER': '#64748b'          // Slate
     };
 
     let totalVal = 0;
@@ -534,11 +571,11 @@ function renderHeatmap(heatmapData) {
         cell.title = `${dateStr}: ₹${amount}`;
 
         // Color intensity
-        if (amount === 0) cell.style.backgroundColor = document.body.classList.contains('dark-mode') ? '#334155' : '#e8f5e9';
-        else if (amount < 500) cell.style.backgroundColor = '#a5d6a7';
-        else if (amount < 2000) cell.style.backgroundColor = '#66bb6a';
-        else if (amount < 5000) cell.style.backgroundColor = '#4caf50';
-        else cell.style.backgroundColor = '#2e7d32';
+        if (amount === 0) cell.style.backgroundColor = document.body.classList.contains('dark-mode') ? '#334155' : '#f8fafc';
+        else if (amount < 500) cell.style.backgroundColor = '#dcfce7'; // Lightest green
+        else if (amount < 2000) cell.style.backgroundColor = '#86efac';
+        else if (amount < 5000) cell.style.backgroundColor = '#22c55e';
+        else cell.style.backgroundColor = '#16a34a'; // Darkest green
 
         if (amount > 0) {
             cell.style.cursor = 'pointer';

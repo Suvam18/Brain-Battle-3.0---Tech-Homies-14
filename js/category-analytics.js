@@ -495,65 +495,7 @@ async function deleteTransaction(id) {
 
 // Expose globally
 
-// Top Spending List Logic
-async function updateTopSpending() {
-    const listContainer = document.querySelector('.spending-list');
-    if (!listContainer) return;
-
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    try {
-        try {
-            const res = await fetch(`${API_BASE_URL}/api/analytics/overview`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const responseData = await res.json();
-
-            if (responseData.success && responseData.data.topCategories) {
-                const sortedCats = responseData.data.topCategories;
-
-                // Render
-                listContainer.innerHTML = '';
-                if (sortedCats.length === 0) {
-                    listContainer.innerHTML = '<li class="spending-item" style="justify-content:center;">No data yet</li>';
-                    return;
-                }
-
-                sortedCats.forEach((item, index) => {
-                    // item is { _id: "Food", total: 5000 }
-                    const name = item._id;
-                    const amount = item.total;
-
-                    const li = document.createElement('li');
-                    li.className = 'spending-item';
-                    // Click to open details
-                    li.style.cursor = 'pointer';
-                    li.onclick = () => openCategory(name);
-
-                    li.innerHTML = `
-                    <div class="spending-number">${index + 1}</div>
-                    <span>${name}</span>
-                    <span style="margin-left:auto; font-weight:600;">₹${amount.toLocaleString()}</span>
-                `;
-                    listContainer.appendChild(li); // Fixed: Use appendChild to preserve events
-                });
-                // Re-bind events if using strings, but better to use appendChild manually loop
-                // Actually, the previous implementation used appendChild, let's stick to it but I replaced the loop content.
-                // Wait, I replaced lines 330-370.
-            }
-
-        } catch (err) {
-            console.error('Error updating top spending', err);
-        }
-
-    } catch (err) {
-        console.error('Error updating top spending', err);
-    }
-}
-
-// Init Top Spending on Load
-document.addEventListener('DOMContentLoaded', updateTopSpending);
+// Top Spending logic moved to script.js for central sync
 
 window.openCategory = openCategory;
 // Expose for any inline calls, although we moved to closure binding
